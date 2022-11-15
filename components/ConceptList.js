@@ -33,8 +33,12 @@ export function UploadsList() {
               <tbody className='divide-y divide-gray-300 dark:divide-gray-700 text-gray-600 dark:text-gray-300'>
                 {data.results.map(({ dataCid, carCids, uploadedAt }, idx) => (
                   <tr key={dataCid} className={idx % 2 === 0 ? undefined : 'bg-gray-900 dark:bg-gray-50 bg-opacity-10 dark:bg-opacity-5'}>
-                    <td className='p-3'><span className="block truncate w-48">{dataCid}</span></td>
-                    <td className='p-3'><span className="block truncate w-48">{carCids[0]}</span></td>
+                    <td className='p-3'><span className="block truncate w-48">
+                      <a href={`https://w3s.link/ipfs/${dataCid}`}>{dataCid}</a>
+                    </span></td>
+                    <td className='p-3'><span className="block truncate w-48">
+                      <a href={`https://w3s.link/ipfs/${carCids[0]}`}>{carCids[0]}</a>
+                    </span></td>
                     <td className='p-3'>{uploadedAt.toLocaleString()}</td>
                   </tr>
                 ))}
