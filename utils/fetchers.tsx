@@ -1,5 +1,5 @@
 
 export async function fetchCID(cid: string) {
-  const response = await fetch(`https://w3s.link/ipfs/${cid}`)
+  const response = await fetch(`https://${cid}.ipfs.w3s.link`)
   return await response.json()
 }

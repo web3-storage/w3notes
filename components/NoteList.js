@@ -36,7 +36,7 @@ export function UploadsList() {
                   <tr key={dataCid} className={idx % 2 === 0 ? undefined : 'bg-gray-900 dark:bg-gray-50 bg-opacity-10 dark:bg-opacity-5'}>
                     <td className='p-3'>
                       <span className="block truncate w-48">
-                        <a href={`https://w3s.link/ipfs/${dataCid}`}>{dataCid}</a>
+                        <a href={`https://${dataCid}.ipfs.w3s.link`}>{dataCid}</a>
                       </span>
                     </td>
                     <td className='p-3'>
