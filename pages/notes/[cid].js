@@ -1,12 +1,8 @@
-import { Plate } from '@udecode/plate-core'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 
+import { ReadOnlyEditor } from '../../components/plate/Editor'
 import { fetchCID } from '../../utils/fetchers'
-
-const editableProps = {
-  readOnly: true
-};
 
 const NotePage = () => {
   const { query } = useRouter()
@@ -14,9 +10,9 @@ const NotePage = () => {
   const { data } = useSWR(cid, fetchCID)
 
   if (data) {
-    return (<Plate editableProps={editableProps} initialValue={data} />)
+    return (<ReadOnlyEditor initialValue={data} />)
   } else {
-    return <div>loading</div>
+    return <div>loading...</div>
   }
 }
 

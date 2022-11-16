@@ -41,6 +41,16 @@ const plugins = createPlugins([
   }
 })
 
+const readOnlyEditableProps = {
+  readOnly: true
+};
+
+export function ReadOnlyEditor(props) {
+  return (
+    <Plate editableProps={readOnlyEditableProps} plugins={plugins} {...props} />
+  )
+}
+
 export default function Editor({ onChange }) {
   return (
     <PlateProvider
