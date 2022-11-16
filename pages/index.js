@@ -1,17 +1,18 @@
-import Head from 'next/head'
-import ConceptList from '../components/ConceptList'
+import { useState } from 'react'
+import Editor from '../components/plate/Editor'
 
 export default function Home() {
+  const [currentValue, setCurrentValue] = useState()
+  function saveNote(){
+      alert(`saving ${JSON.stringify(currentValue)}`)
+  }
   return (
-    <>
-      <Head>
-        <title>w3notes</title>
-        <meta name="description" content="Notes from the permaweb" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main>
-        <ConceptList />
-      </main>
-    </>
+    <div className="flex flex-col items-center">
+      <button onClick={saveNote}>Create Note</button>
+      <div>once you save a note it's permanent, immutable, saved until the end of the network!</div>
+      <div className="w-full">
+        <Editor onChange={setCurrentValue} />
+      </div>
+    </div>
   )
 }
