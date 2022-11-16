@@ -2,12 +2,14 @@
 * adapted from https://github.com/web3-storage/w3console/blob/main/components/UploadsList.js
 */
 import React from 'react'
+import Link from 'next/link'
 import { useUploadsList } from '@w3ui/react-uploads-list'
 import { useAuth, AuthStatus } from '@w3ui/react-keyring'
-import { withIdentity } from './Authenticator'
-import Loading from './Loading'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
-import Link from 'next/link'
+
+import { Loading, SmallLoading } from './Loading'
+import { withIdentity } from './Authenticator'
+import Button from './Button'
 
 export function UploadsList() {
   const { loading, error, data, reload } = useUploadsList()
@@ -22,37 +24,29 @@ export function UploadsList() {
     <div className='w-full my-8'>
       {data && data.results.length
         ? (
-          <div className='overflow-auto border border-gray-300 dark:border-gray-700 rounded-md mb-5'>
-            <table className='w-full border-collapse divide-y border-gray-300 dark:divide-gray-700'>
-              <thead className='text-left bg-gray-400 dark:bg-gray-900 bg-opacity-50 text-sm'>
-                <tr>
-                  <th className='p-3'>Data CID</th>
-                  <th className='p-3'>Note</th>
-                  <th className='p-3'>Date</th>
-                </tr>
-              </thead>
-              <tbody className='divide-y divide-gray-300 dark:divide-gray-700 text-gray-600 dark:text-gray-300'>
-                {data.results.map(({ dataCid, carCids, uploadedAt }, idx) => (
-                  <tr key={dataCid} className={idx % 2 === 0 ? undefined : 'bg-gray-900 dark:bg-gray-50 bg-opacity-10 dark:bg-opacity-5'}>
-                    <td className='p-3'>
-                      <span className="block truncate w-48">
-                        <a href={`https://${dataCid}.ipfs.w3s.link`}>{dataCid}</a>
-                      </span>
-                    </td>
-                    <td className='p-3'>
-                      <span className="block truncate w-48">
-                        <Link href={`/notes/${dataCid}`}>{dataCid}</Link>
-                      </span>
-                    </td>
-                    <td className='p-3'>{uploadedAt.toLocaleString()}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className='flex flex-col mx-24'>
+            {data.results.sort(({ uploadedAt: a }, { uploadedAt: b }) => b - a).map(({ dataCid, uploadedAt }) => (
+              <div key={dataCid}
+                className="flex flex-row justify-between hover:bg-gray-200 p-4">
+                <div className="flex flex-col">
+                  <span className="block truncate w-48 text-xl text-gradient-with-hover font-bold">
+                    <Link href={`/notes/${dataCid}`}>{dataCid}</Link>
+                  </span>
+                  <a href={`https://${dataCid}.ipfs.w3s.link`}
+                    className="text-gray-600 hover:text-gray-800 text-sm"
+                    target="_blank" rel="noreferrer nofollow">
+                    (raw)
+                  </a>
+                </div>
+                <span className="ml-8">{uploadedAt.toLocaleString()}</span>
+              </div>
+            ))}
+            <div className="flex flex-row justify-center">
+              <Button onClick={reload}>Refresh {loading && <SmallLoading />}</Button>
+            </div>
           </div>
         )
-        : <p className='tc my-5'>No uploads</p>}
-      <button type='button' onClick={reload} className='flex items-center gap-2 rounded px-2 py-1 mr3 bg-gray-400 dark:bg-gray-900'>Refresh {loading ? <Loading /> : null}</button>
+        : (loading ? (<div className="flex flex-row justify-center"><Loading/ ></div>) : (<p className='tc my-5'>No uploads</p>))}
     </div>
   )
 }
