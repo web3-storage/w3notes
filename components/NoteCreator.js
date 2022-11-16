@@ -4,7 +4,7 @@ import { useUploader } from '@w3ui/react-uploader'
 import { withIdentity } from './Authenticator'
 import Editor from './plate/Editor'
 
-export function NoteCreator({ onCreated }) {
+export function NoteCreator({ onCreated, onPublish }) {
   const [_, { uploadFile }] = useUploader()
   const [currentValue, setCurrentValue] = useState()
   async function saveNote() {
@@ -13,10 +13,8 @@ export function NoteCreator({ onCreated }) {
   }
   return (
     <div className="flex flex-col items-center">
-      <button onClick={saveNote}>Create Note</button>
-      <div>once you save a note it's permanent, immutable, saved until the end of the network!</div>
       <div className="w-full">
-        <Editor onChange={setCurrentValue} />
+        <Editor onChange={setCurrentValue} onPublish={saveNote}/>
       </div>
     </div>
   )

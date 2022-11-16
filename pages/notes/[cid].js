@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import useSWR from 'swr'
 
 import { ReadOnlyEditor } from '../../components/plate/Editor'
+import Loading from '../../components/Loading'
 import { fetchCID } from '../../utils/fetchers'
 
 const NotePage = () => {
@@ -12,7 +13,11 @@ const NotePage = () => {
   if (data) {
     return (<ReadOnlyEditor initialValue={data} />)
   } else {
-    return <div>loading...</div>
+    return (
+      <div className="w-full flex flex-row justify-center mt-16 text-blue">
+        <Loading />
+      </div>
+    )
   }
 }
 

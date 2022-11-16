@@ -29,7 +29,7 @@ export default function Toolbar({
         <span className="font-bold">B</span>
       </MarkToolbarButton>
       <MarkToolbarButton type={getPluginType(editor, MARK_ITALIC)}>
-        <span className="italic">I</span>
+        <span className="italic font-bold">I</span>
       </MarkToolbarButton>
       <MarkToolbarButton type={getPluginType(editor, MARK_UNDERLINE)}>
         <span className="underline">U</span>
@@ -41,25 +41,25 @@ export default function Toolbar({
         <span className="font-bold text-xs leading-loose">&lt;/&gt;</span>
       </MarkToolbarButton>
       <BlockToolbarButton type={getPluginType(editor, ELEMENT_BLOCKQUOTE)}>
-        <span className="text-xl leading-10">&quot;</span>
+        <span className="text-xl">&#8221;</span>
       </BlockToolbarButton>
       <BlockToolbarButton type={getPluginType(editor, ELEMENT_H1)}>
-        <span className="">H1</span>
+        <span className="font-bold">H1</span>
       </BlockToolbarButton>
       <BlockToolbarButton type={getPluginType(editor, ELEMENT_H2)}>
-        <span className="">H2</span>
+        <span className="font-bold">H2</span>
       </BlockToolbarButton>
       <BlockToolbarButton type={getPluginType(editor, ELEMENT_H3)}>
-        <span className="">H3</span>
+        <span className="font-bold">H3</span>
       </BlockToolbarButton>
       <BlockToolbarButton type={getPluginType(editor, ELEMENT_H4)}>
-        <span className="">H4</span>
+        <span className="font-bold">H4</span>
       </BlockToolbarButton>
       <BlockToolbarButton type={getPluginType(editor, ELEMENT_H5)}>
-        <span className="">H5</span>
+        <span className="font-bold">H5</span>
       </BlockToolbarButton>
       <BlockToolbarButton type={getPluginType(editor, ELEMENT_H6)}>
-        <span className="">H6</span>
+        <span className="font-bold">H6</span>
       </BlockToolbarButton>
 
     </div >
